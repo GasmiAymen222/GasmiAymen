@@ -79,7 +79,7 @@ export default function Hero({ onOpenCV }: HeroProps) {
           {/* Status Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/20 text-xs font-mono text-cyan-300 w-fit">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span>PhD Researcher • Software Engineer</span>
+            <span> Software Engineer</span>
           </div>
 
           {/* Heading with Name & Title */}
@@ -94,13 +94,15 @@ export default function Hero({ onOpenCV }: HeroProps) {
 
           {/* Core Descriptive Text */}
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-            Specializing in{' '}
-            <span className="text-slate-100 font-semibold">Natural Language Processing (NLP)</span>,{' '}
-            <span className="text-slate-100 font-semibold">Large Language Models (LLMs)</span>, and{' '}
-            <span className="text-slate-100 font-semibold">Retrieval-Augmented Generation (RAG)</span>. 
-            I bridge theoretical deep learning research with production-grade backend engineering, 
-            building high-performance architectures, explainable AI pipelines, and distributed APIs.
-          </p>
+  Software and AI Engineer specializing in{' '}
+  <span className="text-slate-100 font-semibold">Natural Language Processing (NLP)</span>,{' '}
+  <span className="text-slate-100 font-semibold">Large Language Models (LLMs)</span>,{' '}
+  <span className="text-slate-100 font-semibold">Retrieval-Augmented Generation (RAG)</span>, and{' '}
+  <span className="text-slate-100 font-semibold">Flutter Development</span>.
+  I build intelligent cross-platform applications by combining AI research with production-grade
+  software and backend engineering, developing scalable APIs, efficient backend systems,
+  AI-powered pipelines, and user-friendly mobile applications.
+</p>
 
           {/* Quick Metrics / Key Focus Tags */}
           <div className="flex flex-wrap gap-2 pt-1 pb-2">

@@ -32,6 +32,15 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    title: 'Frontend & Mobile',
+    icon: 'Layout',
+    skills: [
+      { name: 'React.js (JavaScript, TypeScript)', level: 'Expert', description: 'Component architecture, custom hooks, reactive state management, responsive UI design' },
+      { name: 'Flutter (Android & iOS)', level: 'Advanced', description: 'Cross-platform mobile development, native widget styling, async state management' },
+      { name: 'HTML5 & CSS3', level: 'Expert', description: 'Semantic markup, Tailwind CSS utility systems, responsive layouts, web accessibility (WCAG AA)' },
+    ],
+  },
+  {
     title: 'Backend Engineering',
     icon: 'Server',
     skills: [
@@ -66,15 +75,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Anti-gravity & Autonomous Workflows', level: 'Expert', description: 'Self-correcting agent loops, iterative code synthesis, sandboxed test execution' },
     ],
   },
-  {
-    title: 'Frontend & Mobile',
-    icon: 'Layout',
-    skills: [
-      { name: 'React.js (JavaScript, TypeScript)', level: 'Expert', description: 'Component architecture, custom hooks, reactive state management, responsive UI design' },
-      { name: 'Flutter (Android & iOS)', level: 'Advanced', description: 'Cross-platform mobile development, native widget styling, async state management' },
-      { name: 'HTML5 & CSS3', level: 'Expert', description: 'Semantic markup, Tailwind CSS utility systems, responsive layouts, web accessibility (WCAG AA)' },
-    ],
-  },
+  
   {
     title: 'Databases',
     icon: 'Database',
@@ -109,60 +110,14 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const projects: Project[] = [
-  {
-    id: 'nexus-rag',
-    title: 'NexusRAG — Graph-Augmented Enterprise RAG Engine',
-    category: 'rag',
-    categoryLabel: 'RAG / LLM Application',
-    shortDescription: 'Production-ready RAG system with hybrid dense-sparse vector search, knowledge graph entity linking, and verified source citations.',
-    fullDescription: 'NexusRAG addresses hallucination in complex enterprise documents by combining dense vector similarity (Qdrant) with a structural knowledge graph. Incorporates a dynamic re-ranking stage with cross-encoders and automated claim verification.',
-    architectureHighlights: [
-      'Hybrid dense (embeddings) + BM25 sparse retrieval with reciprocal rank fusion (RRF)',
-      'Knowledge graph entity extraction to resolve multi-hop contextual queries',
-      'Hallucination prevention layer calculating semantic citation attribution',
-      'Async FastAPI streaming pipeline supporting 120+ tokens/sec throughput',
-    ],
-    technologies: ['Python', 'FastAPI', 'LangChain', 'Qdrant', 'Transformers', 'Docker', 'React', 'TypeScript'],
-    githubUrl: 'https://github.com/aymengasmi/nexus-rag',
-    liveDemoUrl: 'https://nexus-rag-demo.example.com',
-    hasInteractiveDemo: true,
-    demoType: 'rag-query',
-    featured: true,
-    stats: [
-      { label: 'Retrieval Latency', value: '42ms' },
-      { label: 'Attribution Fidelity', value: '96.4%' },
-    ],
-  },
-  {
-    id: 'biobert-ner',
-    title: 'BioScribe — Clinical NLP & Knowledge Extraction Engine',
-    category: 'nlp',
-    categoryLabel: 'NLP / BERT',
-    shortDescription: 'Domain-adapted BERT transformer fine-tuned for biomedical entity recognition, medical relation extraction, and clinical note summarization.',
-    fullDescription: 'Built on top of BioBERT and custom transformer layers to parse unstructured electronic health records (EHR). Detects pathologies, drug dosages, and anatomical relations while providing token-level saliency heatmaps for explainable clinical decisions.',
-    architectureHighlights: [
-      'Fine-tuned transformer with custom CRF (Conditional Random Field) token head',
-      'Integrated Gradients algorithm for token-level explainability scoring',
-      'Sub-50ms inference utilizing ONNX Runtime and TensorRT optimization',
-      'HIPAA-compliant token de-identification pipeline for medical privacy',
-    ],
-    technologies: ['Python', 'PyTorch', 'Hugging Face', 'BERT', 'FastAPI', 'Docker', 'PostgreSQL'],
-    githubUrl: 'https://github.com/aymengasmi/bioscribe-nlp',
-    liveDemoUrl: 'https://bioscribe-demo.example.com',
-    hasInteractiveDemo: true,
-    demoType: 'bert-ner',
-    featured: true,
-    stats: [
-      { label: 'F1 Score (NER)', value: '92.8%' },
-      { label: 'Throughput', value: '380 docs/s' },
-    ],
-  },
+  
+ 
   {
     id: 'agentic-dev',
-    title: 'AgenticFlow — Autonomous Multi-Agent Code Review & Audit',
+    title: 'Developing Conversational AI with RAG and Large Language Models',
     category: 'agents',
     categoryLabel: 'AI Agents',
-    shortDescription: 'Coordinated multi-agent workflow leveraging LangGraph to autonomously inspect codebases, execute static analysis, and synthesize patches.',
+    shortDescription: 'in This project i build and design a multilingual AI-powered chatbot for e-commerce customer support. The system integrates Natural Language Processing (NLP), Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) to generate context-aware, accurate, and multilingual responses.Unlike traditional rule-based or standalone LLM systems, the proposed solution grounds responses in a domain-specific knowledge base, significantly reducing hallucinations and improving factual reliability. The chatbot is deployed as a client–server Android application supporting Arabic, English, and French.',
     fullDescription: 'An orchestrated hierarchical agent network where a Planner Agent delegates code analysis to specialized Security, Performance, and Test-Generation agents. Agents execute isolated sandboxed tests to verify patches before proposing merge pull requests.',
     architectureHighlights: [
       'Cyclic graph orchestration using LangGraph with state checkpointing',
@@ -171,73 +126,26 @@ export const projects: Project[] = [
       'GitHub webhook integration with real-time PR status updates',
     ],
     technologies: ['Python', 'LangGraph', 'LangChain', 'Node.js', 'Express.js', 'Docker', 'Redis'],
-    githubUrl: 'https://github.com/aymengasmi/agentic-flow',
-    liveDemoUrl: 'https://agentic-flow.example.com',
-    hasInteractiveDemo: true,
+    githubUrl: 'https://github.com/gasmi123/RAGsystem',
+    liveDemoUrl: '',
+    hasInteractiveDemo: false,
     demoType: 'agent-run',
     featured: true,
     stats: [
-      { label: 'Security Bugs Caught', value: '450+' },
-      { label: 'Mean Fix Time', value: '18s' },
+      
     ],
   },
-  {
-    id: 'synapse-api',
-    title: 'SynapseGateway — Distributed High-Throughput LLM Gateway',
-    category: 'backend',
-    categoryLabel: 'Backend / API Development',
-    shortDescription: 'Scalable backend API service with token-bucket rate limiting, semantic caching with Redis, and resilient streaming LLM proxying.',
-    fullDescription: 'High-performance API gateway engineered with Express.js and Node.js to manage enterprise LLM workloads across multiple self-hosted and cloud model providers. Includes semantic vector-based response caching, circuit breaking, and telemetry.',
-    architectureHighlights: [
-      'Semantic caching with embedding similarity reducing duplicate API calls by 34%',
-      'Server-Sent Events (SSE) streaming engine with zero-buffer chunk forwarding',
-      'PostgreSQL connection pooling and audit logging handling 10k+ req/min',
-      'Distributed rate limiter built on Redis sliding-window algorithms',
-    ],
-    technologies: ['Node.js', 'Express.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Jest'],
-    githubUrl: 'https://github.com/aymengasmi/synapse-gateway',
-    liveDemoUrl: 'https://synapse-gateway.example.com',
-    hasInteractiveDemo: true,
-    demoType: 'api-bench',
-    featured: false,
-    stats: [
-      { label: 'Cache Hit Ratio', value: '34.2%' },
-      { label: 'P99 Latency', value: '< 15ms' },
-    ],
-  },
-  {
-    id: 'pulse-health',
-    title: 'PulseAssist — AI Clinical Triage Mobile App',
-    category: 'mobile',
-    categoryLabel: 'Mobile Applications',
-    shortDescription: 'Cross-platform Flutter application providing secure patient symptom assessment, medical history timeline, and edge AI reasoning.',
-    fullDescription: 'Mobile application designed for intuitive clinical self-assessment. Leverages Flutter with strict BLoC architecture for predictable state management, coupled with offline-first synchronization and end-to-end encrypted biometric authentication.',
-    architectureHighlights: [
-      'Cross-platform Flutter codebase with custom responsive design system',
-      'Offline-first SQLite local store with automated background sync to PostgreSQL',
-      'Biometric authentication and AES-256 local encrypted cache',
-      'Reactive WebSocket chat channel for instant clinical feedback',
-    ],
-    technologies: ['Flutter', 'Dart', 'FastAPI', 'PostgreSQL', 'Docker', 'BLoC Pattern'],
-    githubUrl: 'https://github.com/aymengasmi/pulse-assist-app',
-    liveDemoUrl: 'https://pulse-assist.example.com',
-    hasInteractiveDemo: true,
-    demoType: 'mobile-mock',
-    featured: false,
-    stats: [
-      { label: 'Platforms', value: 'iOS & Android' },
-      { label: 'Crash-Free Rate', value: '99.9%' },
-    ],
-  },
+  
+  
 ];
 
 export const researchTopics: ResearchTopic[] = [
   {
-    id: 'xai-llms',
-    title: 'Explainable AI & Faithfulness in Retrieval-Augmented Generation',
-    subtitle: 'Doctoral Research Focus • NLP & Generative AI',
+    id: 'MTL',
+    title: 'Multi Task Learning For sientiment classification and question classification',
+    subtitle: 'conferance Paper ',
     status: 'Active Research',
-    year: '2024 - Present',
+    year: '06-2026 - Present',
     description: 'Investigating interpretability mechanics in dense retrieval and generative architectures, focusing on preventing hallucination and quantifying semantic attribution.',
     abstract: 'Despite the empirical success of Retrieval-Augmented Generation (RAG), generative models frequently suffer from unfaithful hallucinations and opaque citation mechanisms. This research proposes novel attention-attribution algorithms and token-level fidelity scores to mathematically verify that generated answers derive exclusively from retrieved context chunks.',
     highlights: [
@@ -251,50 +159,6 @@ export const researchTopics: ResearchTopic[] = [
   author={Gasmi, Aymen},
   journal={arXiv preprint arXiv:2501.XXXXX},
   year={2025}
-}`,
-  },
-  {
-    id: 'transformers-optimization',
-    title: 'Knowledge Extraction & Semantic Linking in Specialized Domains',
-    subtitle: 'Transformer Architectures & Domain Fine-Tuning',
-    status: 'Published',
-    venue: 'International Conference on Intelligent Systems & NLP',
-    year: '2024',
-    description: 'Advancing biomedical and technical relation extraction using domain-adapted BERT architectures and low-rank adaptation techniques.',
-    abstract: 'Standard transformer embeddings struggle with dense polysemy in specialized domains. We present a dual-stage knowledge distillation methodology paired with LoRA parameter-efficient fine-tuning that retains semantic nuance while reducing parameter footprint by 70%.',
-    highlights: [
-      'Achieved state-of-the-art F1 score on domain relation benchmarks',
-      'Demonstrated 3.2x inference speedup using structured pruning',
-      'Open-sourced model checkpoints on Hugging Face Hub',
-    ],
-    tags: ['BERT', 'Knowledge Extraction', 'LoRA', 'Hugging Face', 'Transformers'],
-    bibtex: `@inproceedings{gasmi2024knowledge,
-  title={Domain-Adapted Transformer Optimization for Precise Knowledge Extraction},
-  author={Gasmi, Aymen and Collaborators},
-  booktitle={Proceedings of the International Conference on Intelligent Systems},
-  pages={112--124},
-  year={2024}
-}`,
-  },
-  {
-    id: 'agentic-reasoning',
-    title: 'Stateful Graph Workflows for Multi-Agent Planning & Reasoning',
-    subtitle: 'Autonomous AI Agents & Graph Theory',
-    status: 'Under Review',
-    venue: 'Journal of Artificial Intelligence Research (JAIR)',
-    year: '2024',
-    description: 'Designing deterministic state transitions and memory persistence algorithms for cyclic multi-agent collaboration frameworks.',
-    abstract: 'Linear chain-of-thought prompting breaks down in complex multi-step reasoning. We formalize a cyclic graph framework where autonomous agents negotiate sub-tasks with verifiable state constraints, drastically reducing deadlock and runaway execution loops.',
-    highlights: [
-      'Theoretical formulation of bounded agent graph termination guarantees',
-      'Empirical benchmarks on automated software debugging and verification',
-    ],
-    tags: ['LangGraph', 'Multi-Agent Systems', 'Graph Theory', 'Automated Reasoning'],
-    bibtex: `@article{gasmi2024stateful,
-  title={Deterministic State Management in Cyclic Multi-Agent Planning},
-  author={Gasmi, Aymen},
-  journal={Under Review (JAIR)},
-  year={2024}
 }`,
   },
 ];
@@ -348,20 +212,20 @@ export const experiences: ExperienceItem[] = [
 ];
 
 export const educations: EducationItem[] = [
-  {
-    degree: 'Doctor of Philosophy (PhD) in Computer Science',
-    field: 'Natural Language Processing & Explainable AI',
-    institution: 'Faculty of Computer Science & Research Institute',
-    period: '2023 — Present (In Progress)',
-    location: 'Academic Institute',
-    thesis: 'Explainable Architectures and Faithfulness Verification in Retrieval-Augmented Generation & Large Language Models',
-    focusAreas: [
-      'Deep Learning & NLP',
-      'Transformer Architectures & Attention Mechanics',
-      'Knowledge Graphs & Semantic Search',
-      'Statistical Machine Learning',
-    ],
-  },
+  // {
+  //   degree: 'Doctor of Philosophy (PhD) in Computer Science',
+  //   field: 'Natural Language Processing & Explainable AI',
+  //   institution: 'Faculty of Computer Science & Research Institute',
+  //   period: '2023 — Present (In Progress)',
+  //   location: 'Academic Institute',
+  //   thesis: 'Explainable Architectures and Faithfulness Verification in Retrieval-Augmented Generation & Large Language Models',
+  //   focusAreas: [
+  //     'Deep Learning & NLP',
+  //     'Transformer Architectures & Attention Mechanics',
+  //     'Knowledge Graphs & Semantic Search',
+  //     'Statistical Machine Learning',
+  //   ],
+  // },
   {
     degree: 'Master of Science (M.Sc.)',
     field: 'Information Systems & Software Engineering',
@@ -395,45 +259,21 @@ export const educations: EducationItem[] = [
 
 export const certifications: Certification[] = [
   {
-    title: 'Generative AI with Large Language Models',
-    issuer: 'DeepLearning.AI & AWS',
-    year: '2024',
+    title: 'Fundamentals of Deep Learning From Nvedia',
+    issuer: 'DeepLearning.AI',
+    year: '2022',
+    credentialUrl: 'https://www.linkedin.com/posts/gasmi-aymen-a24026252_activity-7003731328051347456-B9c1?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD5LsDwBomOMaq_HbjTeI_d5wWnPRLepKbk',
+    imageUrl: 'src/assets/certaficate/nveia.jpeg',
     badge: 'DeepLearning.AI',
     type: 'certification',
   },
-  {
-    title: 'Natural Language Processing & Transformer Specialization',
-    issuer: 'Hugging Face / DeepLearning.AI',
-    year: '2023',
-    badge: 'Hugging Face',
+   {
+    title: 'Python Programming Certificate',
+    issuer: 'Python Language',
+    year: '2025',
+    credentialUrl: 'https://www.linkedin.com/posts/gasmi-aymen-a24026252_python-programming-certification-activity-7274078132490428417-Ty5h?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD5LsDwBomOMaq_HbjTeI_d5wWnPRLepKbk',
+    imageUrl: 'src/assets/certaficate/python_fendamental.jpeg',
+    badge: 'Python Language',
     type: 'certification',
-  },
-  {
-    title: 'Best Research Paper Award (Student Track)',
-    issuer: 'International Conference on Intelligent Systems',
-    year: '2024',
-    badge: 'Research Award',
-    type: 'award',
-  },
-  {
-    title: 'AWS Certified Solutions Architect (Associate Track)',
-    issuer: 'Amazon Web Services',
-    year: '2023',
-    badge: 'AWS Certified',
-    type: 'certification',
-  },
-  {
-    title: 'National AI & Open Source Hackathon — 1st Place',
-    issuer: 'Tech Innovation Summit',
-    year: '2022',
-    badge: '1st Place Winner',
-    type: 'award',
-  },
-  {
-    title: 'Peer Reviewer Recognition',
-    issuer: 'Transactions on Artificial Intelligence & NLP',
-    year: '2024',
-    badge: 'Academic Service',
-    type: 'publication',
   },
 ];

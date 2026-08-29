@@ -58,6 +58,21 @@ export default function Certifications() {
                     <span className="text-xs font-mono text-slate-400">{cert.year}</span>
                   </div>
 
+                  {cert.imageUrl ? (
+                    <a
+                      href={cert.credentialUrl || cert.imageUrl}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="block overflow-hidden rounded-xl border border-slate-700 bg-slate-950/70"
+                    >
+                      <img
+                        src={cert.imageUrl}
+                        alt={`${cert.title} certificate`}
+                        className="h-40 w-full object-cover transition-transform duration-200 hover:scale-[1.02]"
+                      />
+                    </a>
+                  ) : null}
+
                   <div>
                     <h3 className="text-base font-bold text-white leading-snug">
                       {cert.title}
@@ -66,7 +81,7 @@ export default function Certifications() {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-3">
                   <span
                     className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-medium border ${
                       isAward
@@ -77,10 +92,23 @@ export default function Certifications() {
                     {cert.badge}
                   </span>
 
-                  <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    Verified
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {cert.credentialUrl ? (
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="text-[11px] font-mono text-cyan-300 hover:text-cyan-200 underline-offset-4 hover:underline"
+                      >
+                        View certificate
+                      </a>
+                    ) : null}
+
+                    <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Verified
+                    </span>
+                  </div>
                 </div>
               </div>
             );

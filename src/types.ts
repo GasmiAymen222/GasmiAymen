@@ -68,6 +68,7 @@ export interface Certification {
   issuer: string;
   year: string;
   credentialUrl?: string;
+  imageUrl?: string;
   badge: string;
   type: 'certification' | 'award' | 'publication';
 }
