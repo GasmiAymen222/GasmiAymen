@@ -1,245 +1,191 @@
 import { useState, useRef, ChangeEvent } from 'react';
-import { Github, Linkedin, Mail, ArrowDown, FileText, Check, Camera, RefreshCw, Upload, Sparkles } from 'lucide-react';
+import { FileText, Download, ArrowRight, BookOpen, Camera, RefreshCw, Upload, MapPin, Building2, ExternalLink, Fingerprint, Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
-import defaultPortraitImg from '../assets/images/aymen_gasmi_portrait_1787282056257.jpg';
+import defaultPortraitImg from '../assets/images/GasmiAymen.jpg';
 
 interface HeroProps {
   onOpenCV: () => void;
 }
 
 export default function Hero({ onOpenCV }: HeroProps) {
-  const [copiedEmail, setCopiedEmail] = useState(false);
   const [personalPhoto, setPersonalPhoto] = useState<string>(() => {
-    return localStorage.getItem('aymen_portfolio_custom_photo') || defaultPortraitImg;
+    return localStorage.getItem('aymen_researcher_custom_photo') || defaultPortraitImg;
   });
   const [showPhotoControls, setShowPhotoControls] = useState(false);
   const [customUrlInput, setCustomUrlInput] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
-  };
+  const quickFacts = [
+    { label: 'Current Position', value: 'PhD Researcher in Computer Science' },
+    { label: 'Institution', value: 'International Islamic University Malaysia (IIUM)' },
+    { label: 'Academic Background', value: 'M.Sc. & B.Sc. in Computer Science / Software Engineering' },
+    { label: 'Research Focus', value: 'Optimization-Driven & Explainable NLP' },
+  ];
 
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 8 * 1024 * 1024) {
-        alert('Please choose an image file under 8MB');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result as string;
-        setPersonalPhoto(result);
-        localStorage.setItem('aymen_portfolio_custom_photo', result);
-        setShowPhotoControls(false);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleApplyUrl = () => {
-    if (customUrlInput.trim()) {
-      setPersonalPhoto(customUrlInput.trim());
-      localStorage.setItem('aymen_portfolio_custom_photo', customUrlInput.trim());
-      setCustomUrlInput('');
-      setShowPhotoControls(false);
-    }
-  };
-
-  const handleResetPhoto = () => {
-    setPersonalPhoto(defaultPortraitImg);
-    localStorage.removeItem('aymen_portfolio_custom_photo');
-    setShowPhotoControls(false);
-  };
 
   return (
     <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      id="about"
+      className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 border-b border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/60"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-10 w-[350px] h-[300px] bg-indigo-600/10 rounded-full blur-[110px] pointer-events-none -z-10" />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Main Info & Biography Column */}
+          <div className="lg:col-span-8 flex flex-col space-y-5">
+            {/* Academic Position Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300 w-fit">
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
+              <span>International Islamic University Malaysia (IIUM)</span>
+            </div>
 
-      {/* Subtle grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0)`,
-          backgroundSize: '32px 32px',
-        }}
-      />
+            {/* Name & Academic Title */}
+            <div className="space-y-1.5">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                {personalInfo.name}
+              </h1>
+              <p className="text-lg sm:text-xl font-medium text-blue-700 dark:text-blue-400 tracking-tight">
+                {personalInfo.roleSubtitle}
+              </p>
+            </div>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        {/* Left Column: Bio & Core Info */}
-        <div className="lg:col-span-7 flex flex-col space-y-6">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/20 text-xs font-mono text-cyan-300 w-fit">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span> Software Engineer</span>
-          </div>
+            {/* Academic Biography Text */}
+            <div className="space-y-3 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p>
+                I am a Computer Science PhD researcher at the{' '}
+                <strong className="font-semibold text-slate-900 dark:text-white">International Islamic University Malaysia (IIUM)</strong>{' '}
+                interested in Natural Language Processing, Large Language Models, Knowledge Extraction, Explainable AI, and AI systems. My research focuses on developing optimization-driven and explainable approaches for extracting domain-specific knowledge from textual data.
+              </p>
+              <p>
+                With a strong academic and technical foundation in Information Systems and Software Engineering (M.Sc. &amp; B.Sc.), I bridge theoretical machine learning research with scalable, principled software engineering practices.
+              </p>
+            </div>
 
-          {/* Heading with Name & Title */}
-          <div className="space-y-2">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-              Aymen Gasmi
-            </h1>
-            <p className="text-xl sm:text-2xl font-medium text-cyan-400/90 tracking-tight">
-              Software Engineer &amp; AI Researcher
-            </p>
-          </div>
+            {/* Quick Facts Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {quickFacts.map((fact, i) => (
+                <div
+                  key={i}
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-xs"
+                >
+                  <div className="text-slate-400 dark:text-slate-400 font-medium mb-0.5">
+                    {fact.label}
+                  </div>
+                  <div className="font-semibold text-slate-800 dark:text-slate-200">
+                    {fact.value}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          {/* Core Descriptive Text */}
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-  Software and AI Engineer specializing in{' '}
-  <span className="text-slate-100 font-semibold">Natural Language Processing (NLP)</span>,{' '}
-  <span className="text-slate-100 font-semibold">Large Language Models (LLMs)</span>,{' '}
-  <span className="text-slate-100 font-semibold">Retrieval-Augmented Generation (RAG)</span>, and{' '}
-  <span className="text-slate-100 font-semibold">Flutter Development</span>.
-  I build intelligent cross-platform applications by combining AI research with production-grade
-  software and backend engineering, developing scalable APIs, efficient backend systems,
-  AI-powered pipelines, and user-friendly mobile applications.
-</p>
-
-          {/* Quick Metrics / Key Focus Tags */}
-          <div className="flex flex-wrap gap-2 pt-1 pb-2">
-            {['RAG Systems', 'Transformers & BERT', 'Multi-Agent Workflows', 'FastAPI & Express', 'PyTorch', 'Distributed APIs'].map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 text-xs font-mono text-slate-300 bg-slate-900/80 border border-slate-800 rounded-md"
+            {/* Call-to-Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="#research"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 shadow-xs transition-colors"
               >
-                {tag}
-              </span>
-            ))}
+                <span>View Research</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="#publications"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                <span>View Publications</span>
+              </a>
+
+
+            </div>
+
+            {/* Research Keywords */}
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+                Research Keywords
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-300">
+                {personalInfo.researchKeywords.map((kw, i) => (
+                  <span
+                    key={kw}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-[11px]"
+                  >
+                    <span>{kw}</span>
+                    {i < personalInfo.researchKeywords.length - 1 && (
+                      <span className="text-slate-400 dark:text-slate-600">·</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <a
-              href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-all duration-200 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/30"
-            >
-              <span>View Projects</span>
-              <ArrowDown className="w-4 h-4" />
-            </a>
-
-            <button
-              onClick={onOpenCV}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition-all duration-200"
-            >
-              <FileText className="w-4 h-4 text-cyan-400" />
-              <span>Download CV</span>
-            </button>
-
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/40 rounded-lg transition-colors"
-            >
-              <span>Get in Touch</span>
-            </a>
-          </div>
-
-          {/* Social Icons & Email Quick Copy */}
-          <div className="flex items-center gap-4 pt-4 border-t border-slate-800/70 text-slate-400">
-            <span className="text-xs font-mono text-slate-400">Connect:</span>
-            
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition-colors group"
-            >
-              <div className="p-1.5 rounded-md bg-slate-900 border border-slate-800 group-hover:border-slate-700">
-                <Github className="w-3.5 h-3.5" />
-              </div>
-              <span className="hidden sm:inline">GitHub</span>
-            </a>
-
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 transition-colors group"
-            >
-              <div className="p-1.5 rounded-md bg-slate-900 border border-slate-800 group-hover:border-slate-700">
-                <Linkedin className="w-3.5 h-3.5" />
-              </div>
-              <span className="hidden sm:inline">LinkedIn</span>
-            </a>
-
-            <button
-              onClick={copyEmail}
-              className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-emerald-300 transition-colors group"
-              title="Copy email to clipboard"
-            >
-              <div className="p-1.5 rounded-md bg-slate-900 border border-slate-800 group-hover:border-slate-700">
-                {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Mail className="w-3.5 h-3.5" />}
-              </div>
-              <span className="font-mono text-[11px] text-slate-400 group-hover:text-slate-200">
-                {copiedEmail ? 'Copied to clipboard!' : personalInfo.email}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Right Column: Personal Image & Profile Display */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center">
-          <div className="relative w-full max-w-[420px] group">
-            {/* Outer soft ambient glow border */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500/30 via-indigo-500/20 to-cyan-500/30 rounded-2xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500" />
-
-            {/* Main Card Container */}
-            <div className="relative rounded-2xl bg-[#0c1017] border border-slate-800/90 shadow-2xl overflow-hidden p-3.5 backdrop-blur-xl">
-              {/* Top Bar with Name tag & Photo Controls Trigger */}
-             
-
-              
-              {/* Photo Frame Container */}
-              <div className="relative mt-2 rounded-xl overflow-hidden aspect-square sm:aspect-[4/4.2] bg-slate-950 border border-slate-800/80">
+          {/* Right Column: Academic Portrait Card & Quick Links */}
+          <div className="lg:col-span-4 flex flex-col items-center sm:items-start lg:items-center">
+            <div className="relative w-56 sm:w-64 bg-white dark:bg-slate-800 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+              <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900">
                 <img
                   src={personalPhoto}
-                  alt="Aymen Gasmi - Software Engineer & AI Researcher"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                  alt="Aymen Gasmi - Computer Science PhD Researcher"
+                  className="w-full h-full object-cover object-top"
+                  onError={() => setPersonalPhoto(defaultPortraitImg)}
                 />
 
-                {/* Subtle vignette & gradient overlay at bottom for text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090b10] via-transparent to-transparent opacity-85 pointer-events-none" />
+              </div>
 
-                {/* Floating Specialization Badges over bottom of image */}
-                <div className="absolute bottom-3 left-3 right-3 space-y-1.5 pointer-events-none">
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase font-mono text-cyan-300 bg-slate-950/90 border border-cyan-500/40 backdrop-blur-md rounded-md">
-                      NLP &bull; LLMs &bull; RAG
-                    </span>
-                    <span className="px-2 py-1 text-[11px] font-mono text-emerald-300 bg-slate-950/90 border border-emerald-500/30 backdrop-blur-md rounded-md flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-emerald-400" />
-                      Doctoral Track
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-300 font-medium line-clamp-1 drop-shadow-md">
-                    Doctoral Researcher in Computer Science &amp; Senior Backend Engineer
-                  </p>
+              {/* Caption */}
+              <div className="mt-2.5 text-center space-y-0.5">
+                <div className="text-sm font-semibold text-slate-900 dark:text-white">Aymen Gasmi</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">Department of Computer Science</div>
+                <div className="text-[11px] text-blue-700 dark:text-blue-400 font-medium">
+                  IIUM · Kuala Lumpur, Malaysia
                 </div>
               </div>
 
-              {/* Bottom Quick Highlights */}
-              <div className="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-slate-800/70">
-                <div className="p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 text-center">
-                  <div className="text-xs font-bold font-mono text-cyan-400">6+ Years</div>
-                  <div className="text-[10px] text-slate-400">SWE &amp; AI Exp</div>
-                </div>
-                <div className="p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 text-center">
-                  <div className="text-xs font-bold font-mono text-emerald-400">4+ Papers</div>
-                  <div className="text-[10px] text-slate-400">NLP Publications</div>
-                </div>
-                <div className="p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 text-center">
-                  <div className="text-xs font-bold font-mono text-indigo-400">15+ Models</div>
-                  <div className="text-[10px] text-slate-400">Production ML</div>
-                </div>
+              {/* Scholarly Quick Links */}
+              <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700/70 flex items-center justify-center gap-3 text-slate-400 dark:text-slate-400">
+                <a
+                  href={personalInfo.links.googleScholar}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Google Scholar"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-1"
+                >
+                  <BookOpen className="w-4 h-4" />
+                </a>
+                <a
+                  href={personalInfo.links.orcid}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="ORCID"
+                  className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors p-1"
+                >
+                  <Fingerprint className="w-4 h-4" />
+                </a>
+                <a
+                  href={personalInfo.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="GitHub"
+                  className="hover:text-slate-900 dark:hover:text-white transition-colors p-1"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+                <a
+                  href={personalInfo.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="LinkedIn"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-1"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  title="Email"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-1"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
@@ -248,4 +194,3 @@ export default function Hero({ onOpenCV }: HeroProps) {
     </section>
   );
 }
-

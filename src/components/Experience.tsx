@@ -1,126 +1,100 @@
-import { Briefcase, GraduationCap, Microscope, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
-import { experiences } from '../data/portfolioData';
+import { Microscope, GraduationCap, Code2, Calendar } from 'lucide-react';
+import { academicExperiences } from '../data/portfolioData';
 
 export default function Experience() {
-  const getTypeBadge = (type: string) => {
-    switch (type) {
+  const getIcon = (category: string) => {
+    switch (category) {
       case 'Research':
-        return {
-          icon: Microscope,
-          label: 'AI & NLP Research',
-          classes: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
-        };
-      case 'Industry':
-        return {
-          icon: Briefcase,
-          label: 'Software Engineering',
-          classes: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-        };
-      case 'Academic':
-        return {
-          icon: GraduationCap,
-          label: 'Academic Teaching',
-          classes: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
-        };
+        return Microscope;
+      case 'Teaching':
+        return GraduationCap;
+      case 'Software Development':
+        return Code2;
       default:
-        return {
-          icon: Briefcase,
-          label: type,
-          classes: 'bg-slate-800 text-slate-300 border-slate-700',
-        };
+        return Microscope;
     }
   };
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="experience" className="py-14 sm:py-16 bg-slate-50/70 dark:bg-slate-900/40 border-b border-slate-200/80 dark:border-slate-800">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-start space-y-2 mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400">
-            <span>05. CAREER TIMELINE</span>
+        <div className="mb-8">
+          <div className="text-xs font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-400 mb-1">
+            Professional Track Record
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Professional &amp; Academic Experience
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Work &amp; Research Experience
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base max-w-2xl">
-            A track record of high-impact AI research, enterprise backend engineering, and university instruction.
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+            Doctoral AI research, academic instruction, and full-stack software engineering.
           </p>
         </div>
 
-        {/* Vertical Timeline */}
-        <div className="relative pl-6 sm:pl-8 border-l-2 border-slate-800 space-y-12 ml-2 sm:ml-4">
-          {experiences.map((exp, idx) => {
-            const badge = getTypeBadge(exp.type);
-            const Icon = badge.icon;
-
+        {/* Experience Cards */}
+        <div className="space-y-4">
+          {academicExperiences.map((exp) => {
+            const Icon = getIcon(exp.category);
             return (
-              <div key={exp.id} className="relative group">
-                {/* Node dot on the timeline */}
-                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-6 h-6 rounded-full bg-slate-900 border-2 border-cyan-500 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                  <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                </div>
-
-                {/* Card */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/40 border border-slate-800/90 hover:border-slate-700 transition-all duration-200 space-y-4">
-                  {/* Top row: Role, Badge, Period */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div className="space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono border ${badge.classes}`}>
-                          <Icon className="w-3 h-3" />
-                          <span>{badge.label}</span>
-                        </span>
-                        <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {exp.period}
-                        </span>
-                      </div>
-                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+              <div
+                key={exp.id}
+                className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-2xs space-y-3"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900 shrink-0">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                         {exp.role}
                       </h3>
-                      <div className="flex items-center gap-2 text-xs text-cyan-400 font-mono">
-                        <span>{exp.organization}</span>
-                        <span className="text-slate-600">•</span>
-                        <span className="text-slate-400 flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {exp.location}
-                        </span>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">
+                        <span className="font-semibold text-blue-700 dark:text-blue-400">{exp.organization}</span>
+                        <span> · </span>
+                        <span>{exp.location}</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Summary */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    {exp.description}
-                  </p>
-
-                  {/* Achievements */}
-                  <div className="space-y-2 pt-1">
-                    <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block">
-                      Key Outcomes &amp; Deliverables
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                      {exp.period}
                     </span>
-                    <div className="space-y-2">
-                      {exp.achievements.map((ach, achIdx) => (
-                        <div key={achIdx} className="flex items-start gap-2 text-xs text-slate-300">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
-                          <span>{ach}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200">
+                      {exp.category}
+                    </span>
                   </div>
+                </div>
 
-                  {/* Technologies */}
-                  <div className="pt-3 border-t border-slate-800/70 flex flex-wrap gap-1.5">
-                    {exp.technologies.map((tech) => (
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {exp.description}
+                </p>
+
+                {/* Highlights */}
+                <ul className="space-y-1 text-xs text-slate-600 dark:text-slate-300 pt-1">
+                  {exp.highlights.map((h, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">›</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tech Tags */}
+                {exp.technologies && exp.technologies.length > 0 && (
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-700/60 flex flex-wrap gap-1.5">
+                    {exp.technologies.map((t) => (
                       <span
-                        key={tech}
-                        className="px-2 py-0.5 text-[11px] font-mono text-slate-400 bg-slate-800/50 border border-slate-700/60 rounded"
+                        key={t}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
                       >
-                        {tech}
+                        {t}
                       </span>
                     ))}
                   </div>
-                </div>
+                )}
               </div>
             );
           })}

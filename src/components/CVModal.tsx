@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { X, Printer, Download, Copy, Check, FileText, CheckCircle2, GraduationCap, Briefcase, Code, Award, BookOpen } from 'lucide-react';
-import { personalInfo, experiences, educations, skillCategories, projects, researchTopics, certifications } from '../data/portfolioData';
+import { X, Printer, Download, Copy, Check, FileText, GraduationCap, Briefcase, Code, BookOpen, Building2 } from 'lucide-react';
+import { personalInfo, educationTimeline, academicExperiences, publications, technicalSkills, currentResearch } from '../data/portfolioData';
 
 interface CVModalProps {
   isOpen: boolean;
@@ -16,311 +16,252 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
     window.print();
   };
 
-  const handleDownloadText = () => {
-    const cvText = `
-AYMEN GASMI — CURRICULUM VITAE
-Software Engineer & AI Researcher
+  const handleCopyText = () => {
+    const cvText = `AYMEN GASMI — CURRICULUM VITAE
+PhD Researcher in Computer Science | AI & NLP Researcher
+International Islamic University Malaysia (IIUM)
 Email: ${personalInfo.email}
-LinkedIn: ${personalInfo.linkedin} | GitHub: ${personalInfo.github}
+GitHub: ${personalInfo.links.github} | LinkedIn: ${personalInfo.links.linkedin}
 
-=======================================================
-EXECUTIVE SUMMARY
-=======================================================
-${personalInfo.bio}
+ACADEMIC BIOGRAPHY
+${personalInfo.academicBio}
 
-=======================================================
-TECHNICAL COMPETENCIES (AS IN CV)
-=======================================================
-• Programming Languages: C, C++, Java, Python, R, JavaScript, TypeScript
-• Backend: Python (Flask, FastAPI), Node.js (Express.js), PHP, RESTful API Design, Async Programming
-• AI / RAG / NLP: LangChain, FAISS, Ollama, DeepSeek-R1 (via OpenRouter), Prompt Engineering, Semantic Search, MiniLM, Machine Learning
-• Agentic AI: Claude AI, GPT, Gemini, LLM Integration, Anti-gravity & Autonomous Workflows
-• Frontend & Mobile: React.js (JavaScript, TypeScript), Flutter (Android & iOS), HTML5, CSS3
-• Databases: MySQL, MongoDB, Database Design (ERD, normalization), Optimized SQL Queries, CRUD & Data Validation
-• DevOps & Tools: Git (branching, pull requests, merge conflicts), VPS Hosting, DNS, Server Configuration, System Design
-• Currently Learning: FastAPI, PostgreSQL, Docker, Advanced LLM Fine-tuning
+CURRENT DOCTORAL RESEARCH
+Topic: ${personalInfo.currentResearchTopic}
+Institution: ${personalInfo.institution}
+Department: ${personalInfo.department}
 
-=======================================================
 EDUCATION
-=======================================================
-${educations
+${educationTimeline
   .map(
     (e) => `• ${e.degree} — ${e.field}
-  ${e.institution} (${e.period}) | ${e.location}
-  ${e.honors ? `Honors: ${e.honors}` : ''}
-  ${e.thesis ? `Thesis: ${e.thesis}` : ''}`
+  ${e.institution} (${e.period})
+  ${e.thesisOrDetails ? `Focus: ${e.thesisOrDetails}` : ''}`
   )
   .join('\n\n')}
 
-=======================================================
-PROFESSIONAL & RESEARCH EXPERIENCE
-=======================================================
-${experiences
+RESEARCH & PROFESSIONAL EXPERIENCE
+${academicExperiences
   .map(
     (exp) => `• ${exp.role} — ${exp.organization} (${exp.period})
-  Location: ${exp.location}
-  Summary: ${exp.description}
-  Key Outcomes:
-${exp.achievements.map((a) => `    - ${a}`).join('\n')}
-  Stack: ${exp.technologies.join(', ')}`
+  ${exp.description}
+  Highlights:
+  ${exp.highlights.map((h) => `  - ${h}`).join('\n')}`
   )
   .join('\n\n')}
 
-=======================================================
-KEY DOCTORAL RESEARCH TOPICS
-=======================================================
-${researchTopics
-  .map(
-    (r) => `• ${r.title} (${r.status} ${r.year})
-  Venue: ${r.venue || 'Doctoral Thesis Investigation'}
-  Abstract: ${r.abstract}
-  Tags: ${r.tags.join(', ')}`
-  )
-  .join('\n\n')}
-
-=======================================================
-FEATURED PRODUCTION PROJECTS
-=======================================================
-${projects
+PUBLICATIONS & WORK IN PROGRESS
+${publications
   .map(
     (p) => `• ${p.title}
-  Category: ${p.categoryLabel}
-  Description: ${p.shortDescription}
-  Tech: ${p.technologies.join(', ')}`
+  Authors: ${p.authors.join(', ')} (${p.year})
+  Venue: ${p.venue} [${p.category}]`
   )
   .join('\n\n')}
 
-=======================================================
-CERTIFICATIONS & HONORS
-=======================================================
-${certifications.map((c) => `• ${c.title} — ${c.issuer} (${c.year})`).join('\n')}
-    `.trim();
+TECHNICAL SKILLS & COMPETENCIES
+${technicalSkills.map((cat) => `• ${cat.category}: ${cat.skills.join(', ')}`).join('\n')}
+`;
 
-    const blob = new Blob([cvText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `Aymen_Gasmi_CV_Resume.txt`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const handleCopyText = () => {
-    const textSummary = `Aymen Gasmi - Software Engineer & AI Researcher | ${personalInfo.email} | Specializing in NLP, LLMs, RAG, and Modern Backend Architecture.`;
-    navigator.clipboard.writeText(textSummary);
+    navigator.clipboard.writeText(cvText);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl my-6 bg-[#0e121a] border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-        {/* Actions Bar */}
-        <div className="flex items-center justify-between px-6 py-4 bg-slate-950 border-b border-slate-800 shrink-0">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/70 backdrop-blur-xs overflow-y-auto">
+      <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-150">
+        {/* Modal Top Bar */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80">
           <div className="flex items-center gap-2">
-            <FileText className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-sm sm:text-base font-bold text-white">
-              Curriculum Vitae — {personalInfo.name}
-            </h3>
+            <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">
+              Academic Curriculum Vitae
+            </h2>
           </div>
 
           <div className="flex items-center gap-2">
             <button
-              onClick={handleDownloadText}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 text-xs font-semibold transition-colors"
-              title="Download TXT CV"
+              onClick={handleCopyText}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+              title="Copy plain text CV"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Download File</span>
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Copied' : 'Copy Text'}</span>
             </button>
 
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
-              title="Print or Save as PDF"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+              title="Print CV"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Print / Save PDF</span>
+              <span>Print</span>
             </button>
+
+            <a
+              href="/cv.pdf"
+              download="Aymen_Gasmi_CV.pdf"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download PDF</span>
+            </a>
 
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors ml-2"
+              className="p-1.5 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors ml-2"
+              aria-label="Close CV Modal"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Scrollable Printable Document Sheet */}
-        <div className="p-6 sm:p-10 overflow-y-auto space-y-8 text-slate-300 text-xs sm:text-sm bg-[#090b10]">
-          {/* Resume Header */}
-          <div className="border-b border-slate-800 pb-6 space-y-2">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        {/* Modal Scrollable Body */}
+        <div className="p-6 sm:p-10 overflow-y-auto space-y-8 text-slate-800 dark:text-slate-200 text-sm leading-relaxed">
+          {/* Header */}
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-6 text-center space-y-2">
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {personalInfo.name}
             </h1>
-            <p className="text-cyan-400 font-mono text-sm font-semibold">
-              {personalInfo.title}
+            <p className="text-base font-semibold text-blue-700 dark:text-blue-400">
+              {personalInfo.academicTitle} | AI &amp; NLP Researcher
             </p>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400 font-mono pt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              {personalInfo.institution} · {personalInfo.location}
+            </p>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-600 dark:text-slate-400">
               <span>{personalInfo.email}</span>
-              <span>•</span>
-              <span>github.com/aymengasmi</span>
-              <span>•</span>
-              <span>linkedin.com/in/aymengasmi</span>
-              <span>•</span>
-              <span>Doctoral Research Laboratory</span>
+              <span>·</span>
+              <a href={personalInfo.links.github} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+                GitHub
+              </a>
+              <span>·</span>
+              <a href={personalInfo.links.linkedin} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+                LinkedIn
+              </a>
             </div>
           </div>
 
-          {/* Executive Summary */}
-          <div className="space-y-2">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <Code className="w-3.5 h-3.5" />
-              Executive Profile
-            </h2>
-            <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
-              {personalInfo.bio}
+          {/* Academic Biography */}
+          <section className="space-y-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1">
+              Academic Biography
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+              {personalInfo.academicBio}
             </p>
-          </div>
+          </section>
 
-          {/* Technical Competencies */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              Technical Stack &amp; Skills (From CV)
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• Programming Languages</span>
-                <p className="text-slate-400">
-                  C, C++, Java, Python, R, JavaScript, TypeScript
-                </p>
+          {/* Doctoral Research Topic */}
+          <section className="space-y-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1">
+              PhD Research Focus
+            </h3>
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
+              <div className="font-bold text-slate-900 dark:text-white text-sm">
+                {personalInfo.currentResearchTopic}
               </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• Backend</span>
-                <p className="text-slate-400">
-                  Python (Flask, FastAPI), Node.js (Express.js), PHP, RESTful API Design, Async Programming
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• AI / RAG / NLP</span>
-                <p className="text-slate-400">
-                  LangChain, FAISS, Ollama, DeepSeek-R1 (via OpenRouter), Prompt Engineering, Semantic Search, MiniLM, Machine Learning
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• Agentic AI</span>
-                <p className="text-slate-400">
-                  Claude AI, GPT, Gemini, LLM Integration, Anti-gravity &amp; Autonomous Workflows
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• Frontend &amp; Mobile</span>
-                <p className="text-slate-400">
-                  React.js (JavaScript, TypeScript), Flutter (Android &amp; iOS), HTML5, CSS3
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• Databases</span>
-                <p className="text-slate-400">
-                  MySQL, MongoDB, Database Design (ERD, normalization), Optimized SQL Queries, CRUD &amp; Data Validation
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800 space-y-1">
-                <span className="font-bold text-white font-mono">• DevOps &amp; Tools</span>
-                <p className="text-slate-400">
-                  Git (branching, pull requests, merge conflicts), VPS Hosting, DNS, Server Configuration, System Design
-                </p>
-              </div>
-              <div className="p-3 bg-slate-900/60 rounded-lg border border-amber-500/30 space-y-1">
-                <span className="font-bold text-amber-300 font-mono">• Currently Learning</span>
-                <p className="text-slate-400">
-                  FastAPI, PostgreSQL, Docker, Advanced LLM Fine-tuning
-                </p>
-              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
+                {currentResearch.problemStatement}
+              </p>
             </div>
-          </div>
+          </section>
 
           {/* Education */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <GraduationCap className="w-3.5 h-3.5" />
-              Education
-            </h2>
-            <div className="space-y-3">
-              {educations.map((edu, idx) => (
-                <div key={idx} className="p-3.5 bg-slate-900/40 rounded-lg border border-slate-800 text-xs space-y-1">
-                  <div className="flex flex-col sm:flex-row sm:justify-between font-bold text-white">
-                    <span>{edu.degree} — {edu.field}</span>
-                    <span className="text-slate-400 font-mono font-normal">{edu.period}</span>
+          <section className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1 flex items-center gap-1.5">
+              <GraduationCap className="w-4 h-4 text-blue-600" />
+              <span>Education</span>
+            </h3>
+            <div className="space-y-4">
+              {educationTimeline.map((edu) => (
+                <div key={edu.id} className="space-y-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs">
+                    <span className="font-bold text-slate-900 dark:text-white text-sm">
+                      {edu.degree} — {edu.field}
+                    </span>
+                    <span className="font-mono text-slate-500 dark:text-slate-400">{edu.period}</span>
                   </div>
-                  <div className="text-slate-400">{edu.institution} | {edu.location}</div>
-                  {edu.honors && <div className="text-amber-300 font-mono text-[11px]">{edu.honors}</div>}
-                  {edu.thesis && <div className="text-slate-300 italic text-[11px]">Thesis: &quot;{edu.thesis}&quot;</div>}
+                  <div className="text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    {edu.institution}, {edu.location}
+                  </div>
+                  {edu.thesisOrDetails && (
+                    <div className="text-xs text-slate-500 dark:text-slate-400 italic">
+                      {edu.thesisOrDetails}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Experience */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <Briefcase className="w-3.5 h-3.5" />
-              Experience &amp; Appointments
-            </h2>
+          <section className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1 flex items-center gap-1.5">
+              <Briefcase className="w-4 h-4 text-blue-600" />
+              <span>Research, Teaching &amp; Engineering Experience</span>
+            </h3>
             <div className="space-y-4">
-              {experiences.map((exp, idx) => (
-                <div key={idx} className="p-3.5 bg-slate-900/40 rounded-lg border border-slate-800 text-xs space-y-2">
-                  <div className="flex flex-col sm:flex-row sm:justify-between font-bold text-white">
-                    <span className="text-sm text-cyan-300">{exp.role}</span>
-                    <span className="text-slate-400 font-mono font-normal">{exp.period}</span>
+              {academicExperiences.map((exp) => (
+                <div key={exp.id} className="space-y-1 text-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                    <span className="font-bold text-slate-900 dark:text-white text-sm">
+                      {exp.role}
+                    </span>
+                    <span className="font-mono text-slate-500 dark:text-slate-400">{exp.period}</span>
                   </div>
-                  <div className="text-slate-400 font-mono">{exp.organization} • {exp.location}</div>
-                  <p className="text-slate-300">{exp.description}</p>
-                  <ul className="list-disc list-inside text-slate-400 space-y-0.5 pl-1">
-                    {exp.achievements.map((ach, achIdx) => (
-                      <li key={achIdx}>{ach}</li>
+                  <div className="font-medium text-blue-700 dark:text-blue-400">
+                    {exp.organization} · {exp.location}
+                  </div>
+                  <p className="text-slate-600 dark:text-slate-400 mt-1">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Publications */}
+          <section className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1 flex items-center gap-1.5">
+              <BookOpen className="w-4 h-4 text-blue-600" />
+              <span>Publications &amp; Work in Progress</span>
+            </h3>
+            <div className="space-y-3">
+              {publications.map((pub) => (
+                <div key={pub.id} className="text-xs space-y-1">
+                  <div className="font-semibold text-slate-900 dark:text-white">
+                    {pub.title}
+                  </div>
+                  <div className="text-slate-600 dark:text-slate-400">
+                    {pub.authors.join(', ')} ({pub.year}) — <span className="italic">{pub.venue}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Technical Competencies */}
+          <section className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800 pb-1 flex items-center gap-1.5">
+              <Code className="w-4 h-4 text-blue-600" />
+              <span>Technical Skills &amp; Stack</span>
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              {technicalSkills.map((cat, idx) => (
+                <div key={idx} className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 space-y-1">
+                  <div className="font-semibold text-slate-800 dark:text-slate-200">
+                    {cat.category}
+                  </div>
+                  <ul className="space-y-0.5 text-slate-600 dark:text-slate-400 text-[11px]">
+                    {cat.skills.map((s) => (
+                      <li key={s}>• {s}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Research & Publications */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <BookOpen className="w-3.5 h-3.5" />
-              Selected Research Publications &amp; Preprints
-            </h2>
-            <div className="space-y-2">
-              {researchTopics.map((r, idx) => (
-                <div key={idx} className="p-3 bg-slate-900/30 rounded-lg border border-slate-800 text-xs space-y-1">
-                  <div className="font-bold text-white">{r.title} ({r.year})</div>
-                  <div className="text-slate-400 italic">{r.venue || 'Doctoral Research Thesis'} — Status: {r.status}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Certifications & Awards */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-2">
-              <Award className="w-3.5 h-3.5" />
-              Certifications &amp; Honors
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              {certifications.map((c, idx) => (
-                <div key={idx} className="p-2.5 bg-slate-900/30 rounded border border-slate-800 flex justify-between">
-                  <span className="text-slate-200 font-medium">{c.title}</span>
-                  <span className="text-slate-400 font-mono">{c.issuer}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>

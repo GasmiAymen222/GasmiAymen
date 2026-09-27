@@ -1,74 +1,101 @@
-export interface Project {
+export type ResearchStatus = 'current' | 'planned' | 'completed';
+
+export type PublicationCategory = 
+  | 'Journal Publications'
+  | 'Conference Publications'
+  | 'Preprints'
+  | 'Under Review'
+  | 'Work in Progress';
+
+export interface ResearchInterest {
   id: string;
-  title: string;
-  category: 'rag' | 'nlp' | 'agents' | 'backend' | 'mobile';
-  categoryLabel: string;
-  shortDescription: string;
-  fullDescription: string;
-  architectureHighlights: string[];
-  technologies: string[];
-  githubUrl: string;
-  liveDemoUrl?: string;
-  hasInteractiveDemo: boolean;
-  demoType: 'rag-query' | 'bert-ner' | 'agent-run' | 'api-bench' | 'mobile-mock';
-  featured: boolean;
-  stats?: { label: string; value: string }[];
+  name: string;
+  shortDesc: string;
+  category: 'core' | 'methods' | 'applications';
 }
 
-export interface ResearchTopic {
+export interface ResearchObjective {
+  id: string;
+  title: string;
+  description: string;
+  status: ResearchStatus;
+  keyAspects: string[];
+}
+
+export interface Publication {
+  id: string;
+  title: string;
+  authors: string[];
+  year: string;
+  venue: string;
+  category: PublicationCategory;
+  brief: string;
+  shortDescription?: string;
+  doi?: string;
+  pdfUrl?: string;
+  codeUrl?: string;
+  bibtex?: string;
+  statusTag?: string;
+}
+
+export interface ResearchProject {
   id: string;
   title: string;
   subtitle: string;
-  description: string;
-  tags: string[];
-  status: 'Published' | 'Under Review' | 'Active Research';
-  venue?: string;
-  year: string;
-  abstract: string;
-  bibtex?: string;
-  highlights: string[];
-}
-
-export interface ExperienceItem {
-  id: string;
-  role: string;
-  organization: string;
-  location: string;
-  period: string;
-  type: 'Research' | 'Industry' | 'Academic';
-  description: string;
-  achievements: string[];
   technologies: string[];
+  shortDescription: string;
+  researchMotivation: string;
+  methodology: string;
+  resultsOrStatus: string;
+  githubUrl?: string;
+  paperUrl?: string;
+  featured?: boolean;
+  category: 'RAG Systems' | 'Knowledge Extraction' | 'Optimization & LLMs';
 }
 
 export interface EducationItem {
+  id: string;
   degree: string;
   field: string;
   institution: string;
   period: string;
   location: string;
-  honors?: string;
-  thesis?: string;
+  status?: string;
+  thesisOrDetails?: string;
   focusAreas: string[];
 }
 
-export interface SkillCategory {
-  title: string;
-  icon: string;
-  skills: {
-    name: string;
-    level: 'Core' | 'Advanced' | 'Expert';
-    description?: string;
-    tags?: string[];
-  }[];
+export interface ExperienceItem {
+  id: string;
+  category: 'Research' | 'Teaching' | 'Software Development';
+  role: string;
+  organization: string;
+  location: string;
+  period: string;
+  description: string;
+  highlights: string[];
+  technologies?: string[];
 }
 
-export interface Certification {
-  title: string;
-  issuer: string;
+export interface ResearchJourneyMilestone {
+  id: string;
   year: string;
-  credentialUrl?: string;
-  imageUrl?: string;
-  badge: string;
-  type: 'certification' | 'award' | 'publication';
+  stage: string;
+  title: string;
+  description: string;
+  status: 'completed' | 'in-progress' | 'upcoming';
+  items?: string[];
+}
+
+export interface AcademicProfileLink {
+  name: string;
+  platform: 'Google Scholar' | 'ORCID' | 'ResearchGate' | 'GitHub' | 'LinkedIn' | 'Email';
+  url: string;
+  identifier?: string;
+  description: string;
+}
+
+export interface TechnicalSkillGroup {
+  category: string;
+  skills: string[];
 }

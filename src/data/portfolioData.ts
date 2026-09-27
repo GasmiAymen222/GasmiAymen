@@ -1,279 +1,455 @@
-import { Project, ResearchTopic, ExperienceItem, EducationItem, SkillCategory, Certification } from '../types';
+import {
+  ResearchInterest,
+  ResearchObjective,
+  Publication,
+  ResearchProject,
+  EducationItem,
+  ExperienceItem,
+  ResearchJourneyMilestone,
+  AcademicProfileLink,
+  TechnicalSkillGroup,
+} from '../types';
 
 export const personalInfo = {
   name: 'Aymen Gasmi',
-  title: 'Software Engineer & AI Researcher',
-  tagline: 'Bridging deep learning research in NLP, LLMs, and RAG with resilient, high-throughput software systems.',
+  academicTitle: 'PhD Researcher in Computer Science',
+  roleSubtitle: 'PhD Researcher in Computer Science | AI & NLP Researcher',
+  institution: 'International Islamic University Malaysia (IIUM)',
+  department: 'Department of Computer Science, Kulliyyah of Information and Communication Technology',
+  location: 'Kuala Lumpur, Malaysia',
   email: 'gasmia203@gmail.com',
-  github: 'https://github.com/GasmiAymen222',
-  linkedin: 'https://www.linkedin.com/in/gasmi-aymen-a24026252/',
-  googleScholar: 'https://scholar.google.com',
-  location: 'Available for Global Roles & Research Collaborations',
-  status: 'Open to Senior Software Engineer & Applied AI Research Opportunities',
-  bio: `I am a Software Engineer and AI Researcher working at the intersection of production software architecture and state-of-the-art Natural Language Processing (NLP). My research and engineering focus centers on Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Explainable AI (XAI), and building scalable, fault-tolerant backend infrastructure. With a background spanning doctoral research in Computer Science, full-stack systems engineering, and academic instruction, I specialize in translating complex machine learning concepts into production-grade, reliable software.`,
-  stats: [
-    { label: 'Years Engineering & AI', value: '6+' },
-    { label: 'Publications & Preprints', value: '4+' },
-    { label: 'Production ML Pipelines', value: '15+' },
-    { label: 'Open-Source Contributions', value: '30+' },
+  currentResearchTopic:
+    'Optimization-Driven and Explainable Natural Language Processing for Domain-Specific Knowledge Extraction',
+  shortIntro:
+    'I am a Computer Science PhD researcher interested in Natural Language Processing, Large Language Models, Knowledge Extraction, Explainable AI, and AI systems. My research focuses on developing optimization-driven and explainable approaches for extracting domain-specific knowledge from textual data.',
+  academicBio: `I am an early-career Computer Science PhD researcher at the International Islamic University Malaysia (IIUM). My work focuses on Natural Language Processing, Large Language Models, and explainable AI systems.
+
+With an academic foundation in Information Systems and Software Engineering, I combine theoretical deep learning research with scalable systems engineering. My doctoral research investigates optimization-driven approaches to extract domain-specific knowledge from unstructured text while improving computational efficiency and explainability.`,
+  researchKeywords: [
+    'NLP',
+    'LLMs',
+    'Knowledge Extraction',
+    'Explainable AI',
+    'RAG',
+    'AI Systems',
+  ],
+  links: {
+    github: 'https://github.com/GasmiAymen222',
+    linkedin: 'https://www.linkedin.com/in/gasmi-aymen-a24026252/',
+    googleScholar: 'https://scholar.google.com',
+    orcid: 'https://orcid.org',
+    researchGate: 'https://www.researchgate.net',
+  },
+};
+
+export const researchInterests: ResearchInterest[] = [
+  { id: 'nlp', name: 'Natural Language Processing', shortDesc: 'Neural text understanding and representation.', category: 'core' },
+  { id: 'llms', name: 'Large Language Models', shortDesc: 'Inference, prompt design, and reasoning.', category: 'core' },
+  { id: 'ke', name: 'Knowledge Extraction', shortDesc: 'Automated concept and assertion discovery.', category: 'methods' },
+  { id: 'ner', name: 'Named Entity Recognition', shortDesc: 'Domain-adapted entity identification.', category: 'methods' },
+  { id: 're', name: 'Relation Extraction', shortDesc: 'Mining semantic associations between entities.', category: 'methods' },
+  { id: 'kg', name: 'Knowledge Graphs', shortDesc: 'Structured graph representation and alignment.', category: 'methods' },
+  { id: 'xai', name: 'Explainable AI', shortDesc: 'Attribution analysis and decision transparency.', category: 'core' },
+  { id: 'opt', name: 'Optimization & Metaheuristics', shortDesc: 'Search strategies and parameter efficiency.', category: 'methods' },
+  { id: 'rag', name: 'Retrieval-Augmented Generation', shortDesc: 'Grounded question answering with verifiable citations.', category: 'applications' },
+  { id: 'domain', name: 'Domain-Specific NLP', shortDesc: 'Adapting pipelines to specialized corpora.', category: 'applications' },
+];
+
+export const currentResearch = {
+  problemTitle: 'Research Problem',
+  problemStatement:
+    'Standard NLP and LLM systems struggle on specialized or domain-specific text, often suffering from hallucinations, opaque citations, and computational inefficiencies. This research explores how to systematically extract accurate, structured knowledge from domain corpora while improving optimization and explainability.',
+  currentTopic:
+    'Optimization-Driven and Explainable Natural Language Processing for Domain-Specific Knowledge Extraction',
+  objectives: [
+    {
+      id: 'obj-1',
+      title: 'Domain-Specific Knowledge Extraction',
+      status: 'current' as const,
+      description:
+        'Developing automated mechanisms to extract specialized entities, domain terms, and syntactic structures from technical corpora.',
+      keyAspects: ['Domain vocabulary adaptation', 'Entity recognition', 'Relation extraction'],
+    },
+    {
+      id: 'obj-2',
+      title: 'Optimization-Driven NLP',
+      status: 'current' as const,
+      description:
+        'Applying optimization and metaheuristic search to refine token representations, prompt configurations, and retrieval weights.',
+      keyAspects: ['Metaheuristic search', 'Context optimization', 'Computational efficiency'],
+    },
+    {
+      id: 'obj-3',
+      title: 'Explainable NLP & LLM Systems',
+      status: 'planned' as const,
+      description:
+        'Designing attribution and verification mechanisms to mathematically trace extracted insights directly back to original source texts.',
+      keyAspects: ['Token attribution', 'Citation tracking', 'Hallucination reduction'],
+    },
+    {
+      id: 'obj-4',
+      title: 'Knowledge Representation & Graphs',
+      status: 'planned' as const,
+      description:
+        'Structuring extracted knowledge into relational schemas and semantic graphs to support multi-hop reasoning and verifiable retrieval.',
+      keyAspects: ['Knowledge graph construction', 'Graph-guided retrieval', 'Schema alignment'],
+    },
   ],
 };
 
-export const skillCategories: SkillCategory[] = [
+export const publications: Publication[] = [
+  // {
+  //   id: 'pub-wip-1',
+  //   title: 'Optimization-Driven Knowledge Extraction from Domain-Specific Corpora: A Systematic Review and Taxonomy',
+  //   authors: ['Aymen Gasmi', 'Research Collaborator', 'Supervisor'],
+  //   year: '2026',
+  //   venue: 'Working Draft / Target: IEEE Access / Knowledge-Based Systems',
+  //   category: 'Work in Progress',
+  //   brief:
+  //     'Provides a comprehensive synthesis of metaheuristic optimization and neural approaches for extracting structured domain knowledge from specialized text collections, outlining a taxonomic framework for domain adaptation.',
+  //   shortDescription: 'Systematic review of optimization-driven knowledge extraction.',
+  //   statusTag: 'Draft in Progress',
+  // },
+  // {
+  //   id: 'pub-conf-1',
+  //   title: 'Evaluating Faithfulness and Attribution Verification in Multilingual Retrieval-Augmented Generation',
+  //   authors: ['Aymen Gasmi', 'Supervisor'],
+  //   year: '2026',
+  //   venue: 'Planned Conference Submission (Target: EMNLP / ACL Findings)',
+  //   category: 'Under Review',
+  //   brief:
+  //     'Investigates token-level citation alignment and attribution verification across multilingual RAG pipelines (Arabic, English, French) to systematically quantify and mitigate hallucination rates.',
+  //   shortDescription: 'Attribution verification and hallucination reduction in multilingual RAG.',
+  //   statusTag: 'Under Review',
+  // },
+  // {
+  //   id: 'pub-prep-1',
+  //   title: 'Multi-Task Learning and Optimization for Domain-Specific Text Classification and Knowledge Disambiguation',
+  //   authors: ['Aymen Gasmi'],
+  //   year: '2026',
+  //   venue: 'Research Preprint / Working Paper',
+  //   category: 'Preprints',
+  //   brief:
+  //     'Presents an experimental framework combining multi-task loss weight optimization with shared representations to improve classification accuracy across low-resource domain corpora.',
+  //   shortDescription: 'Multi-task optimization for domain text classification.',
+  //   statusTag: 'Preprint',
+  // },
+  // {
+  //   id: 'pub-placeholder-journal',
+  //   title: 'Explainable Retrieval-Augmented Generation for Specialized Textual Repositories',
+  //   authors: ['Aymen Gasmi', 'Co-Authors'],
+  //   year: '2027 (Planned)',
+  //   venue: 'Doctoral Research Submission Series',
+  //   category: 'Journal Publications',
+  //   brief:
+  //     'Details doctoral experimental findings on integrating graph-guided retrieval with attention saliency metrics for verifiable knowledge extraction in specialized domains.',
+  //   shortDescription: 'Explainable knowledge extraction with graph-guided verification.',
+  //   statusTag: 'Planned Milestone',
+  // },
+  // {
+  //   id: 'pub-placeholder-conf',
+  //   title: 'Domain Adaptation of Pretrained Language Models for Structured Relation Extraction',
+  //   authors: ['Aymen Gasmi', 'Co-Authors'],
+  //   year: '2027 (Planned)',
+  //   venue: 'International Conference on Computational Linguistics & AI',
+  //   category: 'Conference Publications',
+  //   brief:
+  //     'Explores parameter-efficient adaptation strategies for extracting semantic relations from technical documents with minimal labeled training data.',
+  //   shortDescription: 'Parameter-efficient relation extraction.',
+  //   statusTag: 'Planned Milestone',
+  // },
+];
+
+export const researchProjects: ResearchProject[] = [
+  // {
+  //   id: 'ecommerce-rag',
+  //   title: 'Multilingual E-Commerce Customer Support RAG',
+  //   subtitle: 'Multilingual Retrieval-Augmented Generation System',
+  //   category: 'RAG Systems',
+  //   shortDescription:
+  //     'A multilingual retrieval-augmented generation system for customer-support and product-information tasks, grounding responses in domain catalogs to drastically reduce hallucinations.',
+  //   researchMotivation:
+  //     'Commercial LLMs frequently hallucinate product specs and pricing. This system enforces factual grounding by retrieving verified catalog entries across Arabic, English, and French.',
+  //   methodology:
+  //     'Dense vector indexing (FAISS) combined with cross-lingual embeddings, routing queries through similarity filters before LLM response generation.',
+  //   technologies: ['Python', 'Flask', 'LangChain', 'FAISS', 'LLMs', 'Flutter'],
+  //   resultsOrStatus:
+  //     'Working client-server prototype with Android client support; demonstrated zero-shot multilingual question answering with source citations.',
+  //   githubUrl: 'https://github.com/gasmi123/RAGsystem',
+  //   featured: true,
+  // },
+  // {
+  //   id: 'quran-tafsir-rag',
+  //   title: 'Quran Tafsir RAG Prototype',
+  //   subtitle: 'Specialized Corpus Retrieval & Classical Exegesis Knowledge Grounding',
+  //   category: 'Knowledge Extraction',
+  //   shortDescription:
+  //     'A research prototype exploring retrieval-augmented generation over classical Quran Tafsir data, evaluating semantic retrieval across classical scholarship.',
+  //   researchMotivation:
+  //     'Classical scholarship corpora require high factual fidelity and nuanced morphology. This project analyzes how localized LLMs can deliver accurate exegesis retrieval without cloud dependency.',
+  //   methodology:
+  //     'Indexed classical scholarly texts in ChromaDB using specialized sentence embeddings and local Ollama inference for privacy and reproducibility.',
+  //   technologies: ['Python', 'LangChain', 'ChromaDB', 'Ollama', 'Local LLMs'],
+  //   resultsOrStatus:
+  //     'Working research testbed validating semantic chunking strategies for classical Arabic exegesis.',
+  //   githubUrl: 'https://github.com/GasmiAymen222',
+  //   featured: true,
+  // },
+  // {
+  //   id: 'domain-kg-extractor',
+  //   title: 'Optimization-Driven Domain Knowledge Graph Extractor',
+  //   subtitle: 'PhD Research Testbed (In Development)',
+  //   category: 'Optimization & LLMs',
+  //   shortDescription:
+  //     'An ongoing research framework for extracting named entities, specialized attributes, and semantic relations from domain text to construct formal knowledge graphs.',
+  //   researchMotivation:
+  //     'Manual ontology construction is costly. This pipeline explores combining heuristic search with language models to semi-automatically populate knowledge bases.',
+  //   methodology:
+  //     'Hybrid approach: Transformer entity recognizers propose candidate nodes, while metaheuristic ranking filters edges before graph schema alignment.',
+  //   technologies: ['Python', 'PyTorch', 'Transformers', 'Neo4j / NetworkX', 'spaCy'],
+  //   resultsOrStatus:
+  //     'Architecture design and literature review phase as part of doctoral milestone 2026.',
+  //   featured: false,
+  // },
+];
+
+export const educationTimeline: EducationItem[] = [
   {
-    title: 'Programming Languages',
-    icon: 'Code2',
-    skills: [
-      { name: 'Python', level: 'Expert', description: 'Deep learning (PyTorch, Transformers), scientific computing (NumPy, Pandas), async services' },
-      { name: 'JavaScript & TypeScript', level: 'Expert', description: 'Full-stack development, modern ESNext, type-safe API architectures, Node.js & React' },
-      { name: 'Java', level: 'Advanced', description: 'Object-oriented software design, robust backend services, multi-threading and enterprise patterns' },
-      { name: 'C / C++', level: 'Advanced', description: 'Low-level systems programming, memory management, algorithmic problem solving & data structures' },
-      { name: 'R', level: 'Advanced', description: 'Statistical data analysis, quantitative research modeling, experimental evaluation and visualizations' },
+    id: 'edu-phd',
+    degree: 'PhD in Computer Science',
+    field: 'Natural Language Processing & AI',
+    institution: 'International Islamic University Malaysia (IIUM)',
+    period: '2026 – Present',
+    location: 'Kuala Lumpur, Malaysia',
+    status: 'In Progress',
+    thesisOrDetails:
+      'Optimization-Driven and Explainable Natural Language Processing for Domain-Specific Knowledge Extraction.',
+    focusAreas: [
+      'Natural Language Processing',
+      'Large Language Models (LLMs)',
+      'Knowledge Extraction & Graphs',
+      'Explainable AI',
+      'Optimization & Metaheuristics',
     ],
   },
   {
-    title: 'Frontend & Mobile',
-    icon: 'Layout',
-    skills: [
-      { name: 'React.js (JavaScript, TypeScript)', level: 'Expert', description: 'Component architecture, custom hooks, reactive state management, responsive UI design' },
-      { name: 'Flutter (Android & iOS)', level: 'Advanced', description: 'Cross-platform mobile development, native widget styling, async state management' },
-      { name: 'HTML5 & CSS3', level: 'Expert', description: 'Semantic markup, Tailwind CSS utility systems, responsive layouts, web accessibility (WCAG AA)' },
+    id: 'edu-msc',
+    degree: "Master's Degree (M.Sc.)",
+    field: 'Information Systems / Software Engineering',
+    institution: 'University of Mohamed Boudiaf, M’sila',
+    period: '2020 – 2022',
+    location: 'Algeria',
+    status: 'Completed with High Distinction',
+    thesisOrDetails:
+      'Specialized in distributed software architecture, data modeling, backend scalability, and information retrieval.',
+    focusAreas: [
+      'Software Engineering Methodologies',
+      'Distributed Systems Architecture',
+      'Database Optimization & SQL',
+      'Applied Machine Learning',
     ],
   },
   {
-    title: 'Backend Engineering',
-    icon: 'Server',
-    skills: [
-      { name: 'Python (Flask, FastAPI)', level: 'Expert', description: 'High-throughput async endpoints, Pydantic schemas, dependency injection, OpenAPI documentation' },
-      { name: 'Node.js (Express.js)', level: 'Expert', description: 'RESTful API routing, middleware architecture, event loops, streaming responses, WebSocket support' },
-      { name: 'RESTful API Design', level: 'Expert', description: 'Standardized resource endpoints, stateless token authentication, error formatting, versioning' },
-      { name: 'Async Programming', level: 'Expert', description: 'Event-driven I/O concurrency, non-blocking coroutines, thread pooling, message queues' },
-      { name: 'PHP', level: 'Advanced', description: 'Server-side scripting, MVC pattern implementations, legacy integration and dynamic web backends' },
-    ],
-  },
-  {
-    title: 'AI / RAG / NLP',
-    icon: 'Brain',
-    skills: [
-      { name: 'LangChain & LangGraph', level: 'Expert', description: 'Stateful cyclic agent workflows, tool calling, memory management, dynamic routing' },
-      { name: 'FAISS & Semantic Search', level: 'Expert', description: 'Dense vector indexing (IVF, HNSW), similarity metric optimization, multi-vector re-ranking' },
-      { name: 'Ollama & Local LLMs', level: 'Expert', description: 'Local model hosting, quantizations (GGUF), self-hosted inference orchestration' },
-      { name: 'DeepSeek-R1 (via OpenRouter)', level: 'Expert', description: 'Advanced multi-hop reasoning, chain-of-thought distillation, hybrid inference pipelines' },
-      { name: 'Prompt Engineering', level: 'Expert', description: 'Few-shot prompting, structured output enforcement (JSON/Pydantic), system framing' },
-      { name: 'MiniLM & Transformers', level: 'Expert', description: 'Lightweight embedding models (all-MiniLM-L6-v2), BERT fine-tuning, sequence classification' },
-      { name: 'Machine Learning', level: 'Expert', description: 'Supervised/unsupervised algorithms, evaluation metrics (F1, BLEU, ROUGE), model evaluation' },
-    ],
-  },
-  {
-    title: 'Agentic AI',
-    icon: 'Sparkles',
-    skills: [
-      { name: 'Claude AI & Anthropic APIs', level: 'Expert', description: 'Extended context reasoning, artifacts synthesis, tool use and autonomous agents' },
-      { name: 'GPT Models (OpenAI API)', level: 'Expert', description: 'Function calling, structured output generation, agentic planning and embeddings' },
-      { name: 'Gemini (Google AI)', level: 'Expert', description: 'Multimodal comprehension, long-context retrieval, Google GenAI SDK integration' },
-      { name: 'LLM Integration', level: 'Expert', description: 'API orchestration, token budgeting, latency optimization, streaming token protocols' },
-      { name: 'Anti-gravity & Autonomous Workflows', level: 'Expert', description: 'Self-correcting agent loops, iterative code synthesis, sandboxed test execution' },
-    ],
-  },
-  
-  {
-    title: 'Databases',
-    icon: 'Database',
-    skills: [
-      { name: 'MySQL', level: 'Expert', description: 'Relational schema design, ACID transactions, complex joins, foreign key constraints' },
-      { name: 'MongoDB', level: 'Advanced', description: 'Document schemas, aggregation pipelines, flexible unstructured document storage' },
-      { name: 'Database Design (ERD, Normalization)', level: 'Expert', description: 'Entity-relationship diagrams, 1NF-3NF normalization, relational modeling & indexing' },
-      { name: 'Optimized SQL Queries', level: 'Expert', description: 'Query execution plan analysis (EXPLAIN), B-Tree composite indexing, performance tuning' },
-      { name: 'CRUD & Data Validation', level: 'Expert', description: 'Strict request payload validation, sanitation, ORM/ODM modeling, secure transactions' },
-    ],
-  },
-  {
-    title: 'DevOps & Tools',
-    icon: 'Terminal',
-    skills: [
-      { name: 'Git & Version Control', level: 'Expert', description: 'Branching strategies (GitFlow), pull requests, merge conflicts resolution, code review workflows' },
-      { name: 'VPS Hosting & DNS', level: 'Advanced', description: 'Virtual Private Server management, domain DNS records configuration (A, CNAME, MX, TXT)' },
-      { name: 'Server Configuration', level: 'Advanced', description: 'Linux server administration (Ubuntu/Debian), Nginx reverse proxy, SSL/TLS certificates, systemd' },
-      { name: 'System Design', level: 'Advanced', description: 'Scalable service architectures, microservices decoupling, load balancing, fault tolerance' },
-    ],
-  },
-  {
-    title: 'Currently Learning & Expanding',
-    icon: 'Compass',
-    skills: [
-      { name: 'FastAPI', level: 'Advanced', description: 'Diving into high-concurrency async microservices, WebSockets, background tasks' },
-      { name: 'PostgreSQL', level: 'Advanced', description: 'Mastering pgvector extension for native vector search, JSONB indexing, connection pooling' },
-      { name: 'Docker', level: 'Advanced', description: 'Multi-stage container builds, Docker Compose orchestration, lightweight production images' },
-      { name: 'Advanced LLM Fine-tuning', level: 'Advanced', description: 'PEFT, LoRA/QLoRA parameter-efficient adaptation, DPO (Direct Preference Optimization)' },
+    id: 'edu-bsc',
+    degree: "Bachelor's Degree (B.Sc.)",
+    field: 'Computer Systems',
+    institution: 'University of M’sila',
+    period: '2017 – 2020',
+    location: 'Algeria',
+    status: 'Completed with Honors',
+    thesisOrDetails:
+      'Foundation in computer science theory, algorithms, data structures, and object-oriented programming.',
+    focusAreas: [
+      'Algorithms & Data Structures',
+      'Object-Oriented Programming (Python, C++, Java)',
+      'Database Management Systems',
+      'Operating Systems & Networking',
     ],
   },
 ];
 
-export const projects: Project[] = [
-  
- 
+export const academicExperiences: ExperienceItem[] = [
   {
-    id: 'agentic-dev',
-    title: 'Developing Conversational AI with RAG and Large Language Models',
-    category: 'agents',
-    categoryLabel: 'AI Agents',
-    shortDescription: 'in This project i build and design a multilingual AI-powered chatbot for e-commerce customer support. The system integrates Natural Language Processing (NLP), Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) to generate context-aware, accurate, and multilingual responses.Unlike traditional rule-based or standalone LLM systems, the proposed solution grounds responses in a domain-specific knowledge base, significantly reducing hallucinations and improving factual reliability. The chatbot is deployed as a client–server Android application supporting Arabic, English, and French.',
-    fullDescription: 'An orchestrated hierarchical agent network where a Planner Agent delegates code analysis to specialized Security, Performance, and Test-Generation agents. Agents execute isolated sandboxed tests to verify patches before proposing merge pull requests.',
-    architectureHighlights: [
-      'Cyclic graph orchestration using LangGraph with state checkpointing',
-      'Self-correcting feedback loop between code generator and sandbox runner',
-      'Token budget optimization pruning redundant context across agent turns',
-      'GitHub webhook integration with real-time PR status updates',
-    ],
-    technologies: ['Python', 'LangGraph', 'LangChain', 'Node.js', 'Express.js', 'Docker', 'Redis'],
-    githubUrl: 'https://github.com/gasmi123/RAGsystem',
-    liveDemoUrl: '',
-    hasInteractiveDemo: false,
-    demoType: 'agent-run',
-    featured: true,
-    stats: [
-      
-    ],
-  },
-  
-  
-];
-
-export const researchTopics: ResearchTopic[] = [
-  {
-    id: 'MTL',
-    title: 'Multi Task Learning For sientiment classification and question classification',
-    subtitle: 'conferance Paper ',
-    status: 'Active Research',
-    year: '06-2026 - Present',
-    description: 'Investigating interpretability mechanics in dense retrieval and generative architectures, focusing on preventing hallucination and quantifying semantic attribution.',
-    abstract: 'Despite the empirical success of Retrieval-Augmented Generation (RAG), generative models frequently suffer from unfaithful hallucinations and opaque citation mechanisms. This research proposes novel attention-attribution algorithms and token-level fidelity scores to mathematically verify that generated answers derive exclusively from retrieved context chunks.',
+    id: 'exp-research',
+    category: 'Research',
+    role: 'PhD Researcher in Computer Science',
+    organization: 'International Islamic University Malaysia (IIUM)',
+    location: 'Kuala Lumpur, Malaysia',
+    period: '2026 — Present',
+    description:
+      'Conducting doctoral research on optimization-driven and explainable NLP systems. Investigating entity and relation extraction algorithms, hallucination mitigation in LLMs, and semantic knowledge graph synthesis.',
     highlights: [
-      'Formulating token attribution metrics based on integrated gradients and attention rollouts',
-      'Building benchmark evaluation suites for RAG faithfulness and source verifiability',
-      'Developing adaptive context pruning techniques to minimize noise in multi-document retrieval',
+      'Investigating attention attribution mechanisms for domain-specific NLP pipelines.',
+      'Formulating optimization models for prompt configuration and context retrieval.',
+      'Developing reproducible evaluation benchmarks for factual grounding.',
     ],
-    tags: ['Explainable AI (XAI)', 'RAG', 'LLM Hallucination', 'Attention Mechanisms', 'PyTorch'],
-    bibtex: `@article{gasmi2025explainable,
-  title={Attribution Mechanics and Faithfulness Verification in Graph-Augmented RAG Systems},
-  author={Gasmi, Aymen},
-  journal={arXiv preprint arXiv:2501.XXXXX},
-  year={2025}
-}`,
-  },
-];
-
-export const experiences: ExperienceItem[] = [
-  {
-    id: 'exp-ai-research',
-    role: 'AI / NLP Research Engineer & Doctoral Candidate',
-    organization: 'Computer Science Research Laboratory',
-    location: 'Academic & Research Institute',
-    period: '2023 — Present',
-    type: 'Research',
-    description: 'Leading research on Explainable AI, Large Language Models, and dense retrieval systems. Architecting experimental frameworks in PyTorch, managing GPU compute clusters, and publishing research papers.',
-    achievements: [
-      'Engineered an open-source RAG evaluation benchmark utilized by 500+ researchers globally',
-      'Authored 3 peer-reviewed research papers on transformer interpretability and knowledge extraction',
-      'Designed end-to-end data pipelines processing 2M+ research documents with sub-second vector search',
-    ],
-    technologies: ['Python', 'PyTorch', 'Transformers', 'LangChain', 'LangGraph', 'Qdrant', 'FastAPI', 'Hugging Face'],
-  },
-  {
-    id: 'exp-swe',
-    role: 'Senior Software Engineer (Backend & Full-Stack)',
-    organization: 'Enterprise Systems & Cloud Solutions',
-    location: 'Tech Hub',
-    period: '2021 — 2023',
-    type: 'Industry',
-    description: 'Architected scalable microservices and backend API ecosystems serving high-traffic web and mobile clients. Spearheaded the adoption of containerized microservices and automated CI/CD workflows.',
-    achievements: [
-      'Reduced API response times by 45% through Redis caching and PostgreSQL query optimization',
-      'Built a distributed task queue handling 500,000+ background jobs daily with 99.98% reliability',
-      'Mentored junior engineers and instituted rigorous code review standards and unit testing practices',
-    ],
-    technologies: ['Node.js', 'Express.js', 'TypeScript', 'PostgreSQL', 'Docker', 'Redis', 'React', 'Git'],
+    technologies: ['Python', 'PyTorch', 'Transformers', 'LangChain', 'FAISS', 'LaTeX'],
   },
   {
     id: 'exp-teaching',
-    role: 'Graduate Teaching Assistant / Lecturer',
-    organization: 'Faculty of Computer Science',
-    location: 'University Campus',
-    period: '2022 — Present',
-    type: 'Academic',
-    description: 'Delivering lectures and lab sessions on Advanced Algorithms, Natural Language Processing, and Distributed Software Engineering for undergraduate and master’s students.',
-    achievements: [
-      'Developed hands-on coursework on Transformers, PyTorch deep learning, and RESTful API architecture',
-      'Supervised 15+ student capstone projects in AI, full-stack web applications, and mobile systems',
-      'Awarded Department Teaching Excellence recognition based on student reviews',
+    category: 'Teaching',
+    role: 'Academic & Laboratory Instructor',
+    organization: 'Faculty of Computer Science / Higher Education',
+    location: 'Academic Institutions',
+    period: 'Academic Sessions',
+    description:
+      'Delivered practical laboratory sessions and tutorial instruction for undergraduate computer science students, focusing on software engineering principles and computational concepts.',
+    highlights: [
+      'Facilitated laboratory sessions on Object-Oriented Programming, algorithms, and data structures.',
+      'Guided students in building structured software projects with clean architectural separation.',
+      'Supervised academic student projects connecting database engineering and basic AI techniques.',
     ],
-    technologies: ['Python', 'Data Structures & Algorithms', 'PyTorch', 'Software Engineering', 'SQL'],
+    technologies: ['Python', 'Java', 'SQL', 'Algorithms & Data Structures', 'Git'],
+  },
+  {
+    id: 'exp-software',
+    category: 'Software Development',
+    role: 'Software Engineer (Backend & AI Systems)',
+    organization: 'Engineering Systems & Technical Projects',
+    location: 'Remote / Professional',
+    period: '2021 — Present',
+    description:
+      'Designed and built high-performance backend microservices, RESTful API ecosystems, and client-server prototypes. Strong emphasis on bridging software engineering rigor with artificial intelligence pipelines.',
+    highlights: [
+      'Engineered scalable RESTful APIs with Python (Flask, FastAPI) and Node.js (Express.js).',
+      'Architected cross-platform client-server integrations using Flutter and TypeScript/React.',
+      'Implemented relational schemas, index optimization, and containerized Docker environments.',
+    ],
+    technologies: ['Python', 'Node.js', 'Express', 'TypeScript', 'Flutter', 'Docker', 'PostgreSQL', 'MySQL'],
   },
 ];
 
-export const educations: EducationItem[] = [
-  // {
-  //   degree: 'Doctor of Philosophy (PhD) in Computer Science',
-  //   field: 'Natural Language Processing & Explainable AI',
-  //   institution: 'Faculty of Computer Science & Research Institute',
-  //   period: '2023 — Present (In Progress)',
-  //   location: 'Academic Institute',
-  //   thesis: 'Explainable Architectures and Faithfulness Verification in Retrieval-Augmented Generation & Large Language Models',
-  //   focusAreas: [
-  //     'Deep Learning & NLP',
-  //     'Transformer Architectures & Attention Mechanics',
-  //     'Knowledge Graphs & Semantic Search',
-  //     'Statistical Machine Learning',
-  //   ],
-  // },
+export const researchJourneyMilestones: ResearchJourneyMilestone[] = [
   {
-    degree: 'Master of Science (M.Sc.)',
-    field: 'Information Systems & Software Engineering',
-    institution: 'Higher Institute of Computer Science',
-    period: '2020 — 2022',
-    location: 'University Campus',
-    honors: 'Graduated with Highest Honors (Valedictorian / Top 1%)',
-    thesis: 'Distributed Backend Architecture for Scalable Semantic Information Retrieval',
-    focusAreas: [
-      'Advanced Software Architecture',
-      'Distributed Systems & Cloud Computing',
-      'Database Optimization & NoSQL',
-      'Artificial Intelligence & Data Mining',
-    ],
+    id: 'journey-2026-start',
+    year: '2026',
+    stage: 'Phase 1',
+    title: 'Started PhD Research',
+    description:
+      'Enrolled in the PhD program in Computer Science at International Islamic University Malaysia (IIUM). Established core research scope around optimization-driven and explainable NLP.',
+    status: 'in-progress',
   },
   {
-    degree: 'Bachelor of Science (B.Sc.)',
-    field: 'Computer Science',
-    institution: 'Faculty of Science & Computer Studies',
-    period: '2017 — 2020',
-    location: 'University Campus',
-    honors: 'Graduated with Distinction',
-    focusAreas: [
-      'Data Structures & Algorithms',
-      'Object-Oriented Programming (Python, C++, Java)',
-      'Operating Systems & Networking',
-      'Database Management Systems (SQL)',
-    ],
+    id: 'journey-2026-lit',
+    year: '2026 – 2027',
+    stage: 'Phase 2',
+    title: 'Literature Review & Methodology',
+    description:
+      'Systematic review of domain knowledge extraction, metaheuristic optimization in NLP, and attribution verification in foundation models.',
+    status: 'in-progress',
+  },
+  {
+    id: 'journey-proto',
+    year: '2027',
+    stage: 'Phase 3',
+    title: 'Research Prototypes',
+    description:
+      'Building experimental codebases to validate optimization-guided extraction algorithms and attribution evaluation pipelines.',
+    status: 'upcoming',
+  },
+  {
+    id: 'journey-exp',
+    year: '2027 – 2028',
+    stage: 'Phase 4',
+    title: 'Experiments & Benchmarking',
+    description:
+      'Running systematic benchmarks comparing proposed approaches against baseline transformer and LLM architectures.',
+    status: 'upcoming',
+  },
+  {
+    id: 'journey-pub',
+    year: '2027 – 2028',
+    stage: 'Phase 5',
+    title: 'Publications & Conferences',
+    description:
+      'Submitting peer-reviewed articles to international journals and presenting findings at recognized AI & NLP conferences.',
+    status: 'upcoming',
+  },
+  {
+    id: 'journey-thesis',
+    year: '2029',
+    stage: 'Phase 6',
+    title: 'PhD Thesis Synthesis',
+    description:
+      'Synthesizing all research contributions into the final doctoral dissertation for examination and defense.',
+    status: 'upcoming',
   },
 ];
 
-export const certifications: Certification[] = [
+export const academicProfiles: AcademicProfileLink[] = [
   {
-    title: 'Fundamentals of Deep Learning From Nvedia',
-    issuer: 'DeepLearning.AI',
-    year: '2022',
-    credentialUrl: 'https://www.linkedin.com/posts/gasmi-aymen-a24026252_activity-7003731328051347456-B9c1?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD5LsDwBomOMaq_HbjTeI_d5wWnPRLepKbk',
-    imageUrl: 'src/assets/certaficate/nveia.jpeg',
-    badge: 'DeepLearning.AI',
-    type: 'certification',
+    name: 'Google Scholar',
+    platform: 'Google Scholar',
+    url: 'https://scholar.google.com',
+    identifier: 'Aymen Gasmi',
+    description: 'Track citations, forthcoming publications, and research indices.',
   },
-   {
-    title: 'Python Programming Certificate',
-    issuer: 'Python Language',
-    year: '2025',
-    credentialUrl: 'https://www.linkedin.com/posts/gasmi-aymen-a24026252_python-programming-certification-activity-7274078132490428417-Ty5h?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD5LsDwBomOMaq_HbjTeI_d5wWnPRLepKbk',
-    imageUrl: 'src/assets/certaficate/python_fendamental.jpeg',
-    badge: 'Python Language',
-    type: 'certification',
+  {
+    name: 'ORCID',
+    platform: 'ORCID',
+    url: 'https://orcid.org',
+    identifier: '0009-0000-0000-0000',
+    description: 'Persistent unique digital researcher identifier and scholarly record.',
+  },
+  {
+    name: 'ResearchGate',
+    platform: 'ResearchGate',
+    url: 'https://www.researchgate.net',
+    identifier: 'Aymen Gasmi',
+    description: 'Connect with researchers, follow preprints, and access working drafts.',
+  },
+  {
+    name: 'GitHub',
+    platform: 'GitHub',
+    url: 'https://github.com/GasmiAymen222',
+    identifier: '@GasmiAymen222',
+    description: 'Open-source research codebases, RAG prototypes, and technical repositories.',
+  },
+  {
+    name: 'LinkedIn',
+    platform: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/gasmi-aymen-a24026252/',
+    identifier: 'gasmi-aymen',
+    description: 'Professional networking, academic milestones, and collaborations.',
+  },
+];
+
+export const technicalSkills: TechnicalSkillGroup[] = [
+  {
+    category: 'AI, NLP & Deep Learning',
+    skills: [
+      'Natural Language Processing (NLP)',
+      'Large Language Models (LLMs)',
+      'Retrieval-Augmented Generation (RAG)',
+      'Knowledge Extraction & Graphs',
+      'Explainable AI (XAI)',
+      'Transformers & PyTorch',
+      'LangChain & ChromaDB/FAISS',
+      'Metaheuristics & Optimization',
+    ],
+  },
+  {
+    category: 'Software Engineering & Backends',
+    skills: [
+      'Python (Flask, FastAPI)',
+      'Node.js & Express.js',
+      'TypeScript & Modern JavaScript',
+      'RESTful API Architecture',
+      'Async Programming',
+      'Docker & Containerization',
+      'Git Version Control',
+      'Linux Server Administration',
+    ],
+  },
+  {
+    category: 'Databases & Client Technologies',
+    skills: [
+      'PostgreSQL & MySQL (Relational Schema Design)',
+      'Vector Databases & Embeddings',
+      'MongoDB',
+      'Flutter (Mobile Prototypes)',
+      'React.js',
+      'LaTeX Typesetting',
+    ],
   },
 ];
